@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const HeroSection = () => {
+const HeroSection = ({ onEnter }: { onEnter: () => void }) => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
       {/* Blurred glowing blobs */}
@@ -69,6 +69,7 @@ const HeroSection = () => {
         transition={{ delay: 0.9, duration: 0.8 }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.98 }}
+        onClick={onEnter}
         className="relative px-10 py-4 rounded-full font-display text-sm md:text-base font-semibold tracking-widest uppercase bg-primary/10 text-primary glow-blue neon-border cursor-pointer transition-all duration-400"
       >
         Enter Free Coding Universe
