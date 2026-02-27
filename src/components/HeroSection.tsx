@@ -40,11 +40,12 @@ const HeroSection = () => {
               }}
             >
               <div className="text-center p-4">
-                <h1 className="font-display text-xl md:text-2xl font-bold text-gradient leading-tight">
+                <h1 className="font-display text-lg md:text-xl font-bold text-gradient leading-tight">
                   SMART
                   <br />
                   LEARN
                 </h1>
+                <p className="text-[9px] md:text-[10px] text-muted-foreground mt-1 font-body">100% Free</p>
               </div>
             </div>
           ))}
@@ -58,7 +59,7 @@ const HeroSection = () => {
         transition={{ delay: 0.6, duration: 0.8 }}
         className="text-lg md:text-2xl text-muted-foreground font-body mb-8 tracking-wide"
       >
-        Experience Learning in 3D
+        Learn Coding. 100% Free.
       </motion.p>
 
       {/* CTA Button */}
@@ -70,7 +71,7 @@ const HeroSection = () => {
         whileTap={{ scale: 0.98 }}
         className="relative px-10 py-4 rounded-full font-display text-sm md:text-base font-semibold tracking-widest uppercase bg-primary/10 text-primary glow-blue neon-border cursor-pointer transition-all duration-400"
       >
-        Enter Learning Universe
+        Enter Free Coding Universe
       </motion.button>
 
       {/* Scroll indicator */}
