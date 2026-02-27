@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { Sparkles, BookOpen, Users, Trophy } from "lucide-react";
 
 const stats = [
-  { icon: BookOpen, label: "Courses", value: "200+" },
-  { icon: Users, label: "Students", value: "50K+" },
-  { icon: Trophy, label: "Certificates", value: "30K+" },
-  { icon: Sparkles, label: "5-Star Reviews", value: "12K+" },
+  { icon: BookOpen, label: "Free Courses", value: "10+" },
+  { icon: Users, label: "Students", value: "155K+" },
+  { icon: Trophy, label: "Certificates", value: "45K+" },
+  { icon: Sparkles, label: "5-Star Reviews", value: "18K+" },
 ];
 
 const StatsSection = () => {

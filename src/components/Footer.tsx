@@ -6,7 +6,7 @@ const Footer = () => {
           SMARTLEARN
         </h3>
         <p className="text-muted-foreground text-sm mb-6">
-          Experience Learning in 3D — A Next-Generation Education Platform
+          100% Free Coding Academy — A Next-Generation AI Learning Platform
         </p>
         <div className="flex items-center justify-center gap-6 text-xs text-muted-foreground mb-8">
           <span className="hover:text-primary transition-colors cursor-pointer">Courses</span>
