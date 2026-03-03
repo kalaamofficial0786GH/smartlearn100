@@ -4,16 +4,16 @@ import { useMotionValue, useTransform } from "framer-motion";
 import { Star, Zap, ArrowLeft } from "lucide-react";
 
 export const courses = [
-  { id: 1, title: "Full Stack Web Development", category: "Web Dev", rating: 4.9, students: "18,540", reviews: "4,200+", color: "neon-blue" },
-  { id: 2, title: "Frontend (HTML, CSS, JS)", category: "Frontend", rating: 4.8, students: "22,300", reviews: "5,100+", color: "neon-violet" },
-  { id: 3, title: "React JS Complete Course", category: "Frontend", rating: 4.7, students: "14,120", reviews: "3,400+", color: "neon-blue" },
-  { id: 4, title: "Node.js Backend", category: "Backend", rating: 4.8, students: "11,980", reviews: "2,800+", color: "neon-violet" },
-  { id: 5, title: "Python Masterclass", category: "Language", rating: 4.9, students: "25,670", reviews: "6,300+", color: "neon-blue" },
-  { id: 6, title: "Data Structures & Algorithms", category: "CS Core", rating: 4.8, students: "16,240", reviews: "3,900+", color: "neon-violet" },
-  { id: 7, title: "MongoDB Essentials", category: "Database", rating: 4.6, students: "9,870", reviews: "2,100+", color: "neon-blue" },
-  { id: 8, title: "Flutter App Development", category: "Mobile", rating: 4.7, students: "12,110", reviews: "2,700+", color: "neon-violet" },
-  { id: 9, title: "Git & GitHub", category: "DevOps", rating: 4.8, students: "13,450", reviews: "3,200+", color: "neon-blue" },
-  { id: 10, title: "UI/UX Design", category: "Design", rating: 4.7, students: "10,320", reviews: "2,500+", color: "neon-violet" },
+  { id: 1, title: "Full Stack Web Development", category: "Web Dev", rating: 4.9, students: "18,540", reviews: "4,200+", color: "neon-blue", videoId: "nu_pCVPKzTk", lang: "English" },
+  { id: 2, title: "Frontend (HTML, CSS, JS)", category: "Frontend", rating: 4.8, students: "22,300", reviews: "5,100+", color: "neon-violet", videoId: "HcOc7P5BMi4", lang: "Tamil" },
+  { id: 3, title: "React JS Complete Course", category: "Frontend", rating: 4.7, students: "14,120", reviews: "3,400+", color: "neon-blue", videoId: "SqcY0GlETPk", lang: "English" },
+  { id: 4, title: "Node.js Backend", category: "Backend", rating: 4.8, students: "11,980", reviews: "2,800+", color: "neon-violet", videoId: "Oe421EPjeBE", lang: "English" },
+  { id: 5, title: "Python Masterclass", category: "Language", rating: 4.9, students: "25,670", reviews: "6,300+", color: "neon-blue", videoId: "UrsmFxEIp5k", lang: "Tamil" },
+  { id: 6, title: "Data Structures & Algorithms", category: "CS Core", rating: 4.8, students: "16,240", reviews: "3,900+", color: "neon-violet", videoId: "8hly31xKli0", lang: "English" },
+  { id: 7, title: "MongoDB Essentials", category: "Database", rating: 4.6, students: "9,870", reviews: "2,100+", color: "neon-blue", videoId: "c2M-rlkkT5o", lang: "English" },
+  { id: 8, title: "Flutter App Development", category: "Mobile", rating: 4.7, students: "12,110", reviews: "2,700+", color: "neon-violet", videoId: "CD1Y2DmL5JM", lang: "Tamil" },
+  { id: 9, title: "Git & GitHub", category: "DevOps", rating: 4.8, students: "13,450", reviews: "3,200+", color: "neon-blue", videoId: "RGOj5yH7evk", lang: "English" },
+  { id: 10, title: "UI/UX Design", category: "Design", rating: 4.7, students: "10,320", reviews: "2,500+", color: "neon-violet", videoId: "c9Wg6Cb_YlU", lang: "English" },
 ];
 
 const CourseCard3D = ({ course, index, onSelect }: { course: typeof courses[0]; index: number; onSelect: () => void }) => {
