@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, Zap, ArrowLeft, Users, MessageSquare, TrendingUp, Play, CheckCircle, Mail } from "lucide-react";
+import { Star, Zap, ArrowLeft, Users, MessageSquare, TrendingUp, Play, CheckCircle, Mail, ExternalLink, List, Globe, CheckSquare } from "lucide-react";
 import { courses } from "./CourseUniverse";
 
 type Course = typeof courses[0];
@@ -99,8 +99,24 @@ const Typewriter = ({ text, delay = 0 }: { text: string; delay?: number }) => {
   return <span>{displayed}<span className="animate-pulse">|</span></span>;
 };
 
+const courseLessons: Record<number, string[]> = {
+  1: ["Intro to Full Stack", "HTML & CSS Basics", "JavaScript Deep Dive", "React Frontend", "Node.js Backend", "Database Integration", "Deployment"],
+  2: ["HTML Foundations", "CSS Layouts & Grid", "JavaScript Basics", "DOM Manipulation", "Responsive Design", "Mini Projects"],
+  3: ["React Basics", "Components & Props", "State & Hooks", "Routing", "API Integration", "Redux Toolkit", "Build & Deploy"],
+  4: ["Node.js Intro", "Express.js", "REST APIs", "Authentication", "Database (MongoDB)", "Error Handling", "Production Deploy"],
+  5: ["Python Setup", "Variables & Types", "Control Flow", "Functions & OOP", "File Handling", "Libraries & Frameworks", "Projects"],
+  6: ["Big-O Notation", "Arrays & Strings", "Linked Lists", "Stacks & Queues", "Trees & Graphs", "Sorting Algorithms", "Dynamic Programming"],
+  7: ["MongoDB Setup", "CRUD Operations", "Schema Design", "Indexing", "Aggregation", "Mongoose ODM", "Atlas Cloud"],
+  8: ["Flutter Setup", "Dart Basics", "Widgets", "State Management", "Navigation", "Firebase Integration", "Publishing"],
+  9: ["Git Basics", "Branching", "Merging & Rebasing", "GitHub Flow", "Pull Requests", "Actions & CI/CD", "Open Source"],
+  10: ["Design Thinking", "Wireframing", "Figma Basics", "Color & Typography", "Prototyping", "User Testing", "Portfolio"],
+};
+
 const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }) => {
   const [enrollState, setEnrollState] = useState<"idle" | "loading" | "success">("idle");
+  const [completedLessons, setCompletedLessons] = useState<number[]>([]);
+  const [showPlaylist, setShowPlaylist] = useState(false);
+  const lessons = courseLessons[course.id] || [];
   const isBlue = course.color === "neon-blue";
   const studentCount = useCounter(parseInt(course.students.replace(/,/g, "")), 1500);
   const successRate = useCounter(87, 1500);
@@ -268,6 +284,45 @@ const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }
           </motion.div>
         </div>
 
+        {/* Auto-playing intro video (always visible) */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
+          className="mb-8"
+        >
+          <h3 className="font-display text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+            <Play className="w-5 h-5 text-primary" />
+            Welcome to {course.title}
+          </h3>
+          <div className="glass rounded-3xl p-2 neon-border overflow-hidden"
+            style={{ boxShadow: "0 0 30px hsl(190 100% 50% / 0.15), 0 0 60px hsl(190 100% 50% / 0.05)" }}
+          >
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
+              <iframe
+                src={`https://www.youtube.com/embed/${course.videoId}?autoplay=1&mute=1&rel=0`}
+                title={course.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+            <div className="flex items-center gap-2 px-4 py-3">
+              <Globe className="w-4 h-4 text-muted-foreground" />
+              <span className="text-xs text-muted-foreground font-display tracking-wider">{course.lang} Intro</span>
+              <a
+                href={`https://www.youtube.com/watch?v=${course.videoId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-auto flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span className="font-display tracking-wider">Watch on YouTube</span>
+              </a>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Enrollment success section */}
         <AnimatePresence>
           {enrollState === "success" && (
@@ -302,35 +357,111 @@ const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }
                 </div>
               </motion.div>
 
-              {/* Video player */}
+              {/* Video player + Lesson sidebar */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
-                className="glass rounded-3xl p-2 mb-6 neon-border overflow-hidden"
+                className="flex flex-col lg:flex-row gap-6 mb-6"
               >
-                <div className="relative w-full aspect-video bg-background rounded-2xl flex items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5" />
-                  <div className="relative z-10 text-center">
-                    <motion.div
-                      whileHover={{ scale: 1.1 }}
-                      className="w-20 h-20 rounded-full glass-strong flex items-center justify-center mx-auto mb-4 cursor-pointer glow-blue"
-                    >
-                      <Play className="w-8 h-8 text-primary ml-1" />
-                    </motion.div>
-                    <h3 className="font-display text-sm font-semibold text-foreground mb-1">
-                      Welcome to {course.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground">Lesson 1 — Introduction</p>
+                {/* YouTube Embed */}
+                <div className="flex-1 glass rounded-3xl p-2 neon-border overflow-hidden"
+                  style={{ boxShadow: "0 0 30px hsl(190 100% 50% / 0.15), 0 0 60px hsl(190 100% 50% / 0.05)" }}
+                >
+                  <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${course.videoId}?autoplay=1&mute=1&rel=0`}
+                      title={course.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full"
+                    />
+                  </div>
+                  <div className="flex items-center gap-2 px-4 py-3">
+                    <Globe className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground font-display tracking-wider">{course.lang} Intro</span>
+                    <span className="ml-auto flex items-center gap-1 px-3 py-1 rounded-full bg-primary/20 border border-primary/40">
+                      <Zap className="w-3 h-3 text-primary" />
+                      <span className="text-[10px] font-display font-bold text-primary tracking-wider">FREE</span>
+                    </span>
                   </div>
                 </div>
+
+                {/* Lesson Sidebar */}
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.8, duration: 0.5 }}
+                  className="lg:w-72 glass rounded-2xl p-5 glow-violet max-h-[420px] overflow-y-auto"
+                >
+                  <h4 className="font-display text-xs tracking-wider text-muted-foreground mb-4 uppercase flex items-center gap-2">
+                    <List className="w-4 h-4" /> Course Lessons
+                  </h4>
+                  <div className="flex flex-col gap-2">
+                    {lessons.map((lesson, i) => {
+                      const done = completedLessons.includes(i);
+                      return (
+                        <motion.button
+                          key={i}
+                          initial={{ opacity: 0, x: 10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.9 + i * 0.05 }}
+                          onClick={() => setCompletedLessons(prev => done ? prev.filter(l => l !== i) : [...prev, i])}
+                          className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-left text-xs transition-all cursor-pointer ${done ? "bg-primary/15 text-primary" : "hover:bg-muted/30 text-muted-foreground hover:text-foreground"}`}
+                        >
+                          <CheckSquare className={`w-4 h-4 flex-shrink-0 ${done ? "text-primary" : "text-muted-foreground/40"}`} />
+                          <span className="font-display">{i + 1}. {lesson}</span>
+                        </motion.button>
+                      );
+                    })}
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-muted/20">
+                    <div className="flex justify-between text-xs mb-1.5">
+                      <span className="text-muted-foreground">Progress</span>
+                      <span className="text-primary font-semibold">{Math.round((completedLessons.length / lessons.length) * 100)}%</span>
+                    </div>
+                    <div className="h-2 bg-muted rounded-full overflow-hidden">
+                      <motion.div
+                        className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
+                        animate={{ width: `${(completedLessons.length / lessons.length) * 100}%` }}
+                        transition={{ duration: 0.4 }}
+                        style={{ boxShadow: "0 0 8px hsl(190 100% 50% / 0.4)" }}
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              {/* Action buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 0.5 }}
+                className="flex flex-wrap gap-4 mb-6"
+              >
+                <button
+                  onClick={() => setShowPlaylist(!showPlaylist)}
+                  className="glass rounded-full px-6 py-3 flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors glow-blue cursor-pointer"
+                >
+                  <Play className="w-4 h-4" />
+                  <span className="font-display text-xs tracking-wider">Course Playlist</span>
+                </button>
+                <a
+                  href={`https://www.youtube.com/watch?v=${course.videoId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glass rounded-full px-6 py-3 flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors glow-violet cursor-pointer"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  <span className="font-display text-xs tracking-wider">Watch on YouTube</span>
+                </a>
               </motion.div>
 
               {/* Email section */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1, duration: 0.5 }}
+                transition={{ delay: 1.2, duration: 0.5 }}
                 className="glass rounded-2xl p-6 glow-violet"
               >
                 <div className="flex items-center gap-3 mb-3">
