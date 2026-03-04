@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, Zap, ArrowLeft, Users, MessageSquare, TrendingUp, Play, CheckCircle, Mail, ExternalLink, List, Globe, CheckSquare } from "lucide-react";
-import { courses } from "./CourseUniverse";
-
-type Course = typeof courses[0];
+import { Star, Zap, ArrowLeft, Users, MessageSquare, TrendingUp, Play, CheckCircle, Mail, ExternalLink, List, Globe, CheckSquare, Clock, BarChart3 } from "lucide-react";
+import { type Course } from "@/data/courses";
+import { courseLessons } from "@/data/courses";
 
 // Animated counter hook
 const useCounter = (end: number, duration = 1500, start = 0) => {
@@ -99,19 +98,6 @@ const Typewriter = ({ text, delay = 0 }: { text: string; delay?: number }) => {
   return <span>{displayed}<span className="animate-pulse">|</span></span>;
 };
 
-const courseLessons: Record<number, string[]> = {
-  1: ["Intro to Full Stack", "HTML & CSS Basics", "JavaScript Deep Dive", "React Frontend", "Node.js Backend", "Database Integration", "Deployment"],
-  2: ["HTML Foundations", "CSS Layouts & Grid", "JavaScript Basics", "DOM Manipulation", "Responsive Design", "Mini Projects"],
-  3: ["React Basics", "Components & Props", "State & Hooks", "Routing", "API Integration", "Redux Toolkit", "Build & Deploy"],
-  4: ["Node.js Intro", "Express.js", "REST APIs", "Authentication", "Database (MongoDB)", "Error Handling", "Production Deploy"],
-  5: ["Python Setup", "Variables & Types", "Control Flow", "Functions & OOP", "File Handling", "Libraries & Frameworks", "Projects"],
-  6: ["Big-O Notation", "Arrays & Strings", "Linked Lists", "Stacks & Queues", "Trees & Graphs", "Sorting Algorithms", "Dynamic Programming"],
-  7: ["MongoDB Setup", "CRUD Operations", "Schema Design", "Indexing", "Aggregation", "Mongoose ODM", "Atlas Cloud"],
-  8: ["Flutter Setup", "Dart Basics", "Widgets", "State Management", "Navigation", "Firebase Integration", "Publishing"],
-  9: ["Git Basics", "Branching", "Merging & Rebasing", "GitHub Flow", "Pull Requests", "Actions & CI/CD", "Open Source"],
-  10: ["Design Thinking", "Wireframing", "Figma Basics", "Color & Typography", "Prototyping", "User Testing", "Portfolio"],
-};
-
 const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }) => {
   const [enrollState, setEnrollState] = useState<"idle" | "loading" | "success">("idle");
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
@@ -160,9 +146,23 @@ const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }
             <span className="text-xs font-display font-bold text-primary tracking-wider">100% FREE</span>
           </div>
 
-          <span className={`inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-4 ${isBlue ? "bg-primary/15 text-primary" : "bg-accent/15 text-accent"}`}>
-            {course.category}
-          </span>
+          <div className="flex flex-wrap items-center gap-2 mb-4">
+            <span className={`inline-block px-4 py-1.5 rounded-full text-xs font-semibold ${isBlue ? "bg-primary/15 text-primary" : "bg-accent/15 text-accent"}`}>
+              {course.category}
+            </span>
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted/30 text-xs text-muted-foreground">
+              <Globe className="w-3.5 h-3.5" />
+              {course.lang}
+            </span>
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted/30 text-xs text-muted-foreground">
+              <BarChart3 className="w-3.5 h-3.5" />
+              {course.level}
+            </span>
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted/30 text-xs text-muted-foreground">
+              <Clock className="w-3.5 h-3.5" />
+              {course.duration}
+            </span>
+          </div>
 
           <h1 className="font-display text-2xl md:text-4xl font-bold text-foreground mb-6 max-w-lg">
             {course.title}
@@ -187,43 +187,23 @@ const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }
             </div>
           </div>
 
-          {/* Enroll button with states */}
           <AnimatePresence mode="wait">
             {enrollState === "idle" && (
-              <motion.button
-                key="enroll"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                onClick={handleEnroll}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
+              <motion.button key="enroll" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9 }}
+                onClick={handleEnroll} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
                 className="px-10 py-4 rounded-full font-display text-sm font-semibold tracking-widest uppercase bg-primary/10 text-primary glow-blue neon-border cursor-pointer transition-all duration-400"
               >
                 Enroll FREE
               </motion.button>
             )}
-
             {enrollState === "loading" && (
-              <motion.div
-                key="loading"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                className="flex items-center gap-4"
-              >
+              <motion.div key="loading" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full border-2 border-primary/30 border-t-primary animate-spin" />
                 <span className="font-display text-sm text-muted-foreground tracking-wider">Enrolling...</span>
               </motion.div>
             )}
-
             {enrollState === "success" && (
-              <motion.div
-                key="success"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="flex items-center gap-3"
-              >
+              <motion.div key="success" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-3">
                 <CheckCircle className="w-6 h-6 text-primary" />
                 <span className="font-display text-sm text-primary tracking-wider">Enrolled Successfully</span>
               </motion.div>
@@ -233,50 +213,29 @@ const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }
 
         {/* Stats grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-          >
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>
             <NeonChart />
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="glass rounded-2xl p-6 glow-violet flex flex-col items-center justify-center"
-          >
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
+            className="glass rounded-2xl p-6 glow-violet flex flex-col items-center justify-center">
             <h4 className="font-display text-xs tracking-wider text-muted-foreground mb-6 uppercase">Career Scope</h4>
             <ScopeRing value={92} label="High Career Scope — 92% Industry Demand" />
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="glass rounded-2xl p-6 glow-blue"
-          >
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.6 }}
+            className="glass rounded-2xl p-6 glow-blue">
             <h4 className="font-display text-xs tracking-wider text-muted-foreground mb-4 uppercase">Success Rate</h4>
             <div className="flex flex-col gap-4">
-              {[
-                { label: "Completion", value: 87 },
-                { label: "Job Placement", value: 72 },
-                { label: "Satisfaction", value: 95 },
-              ].map((item, i) => (
+              {[{ label: "Completion", value: 87 }, { label: "Job Placement", value: 72 }, { label: "Satisfaction", value: 95 }].map((item, i) => (
                 <div key={item.label}>
                   <div className="flex justify-between text-xs mb-1">
                     <span className="text-muted-foreground">{item.label}</span>
                     <span className="text-primary font-semibold">{item.value}%</span>
                   </div>
                   <div className="h-2 bg-muted rounded-full overflow-hidden">
-                    <motion.div
-                      className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
-                      initial={{ width: 0 }}
-                      animate={{ width: `${item.value}%` }}
+                    <motion.div className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
+                      initial={{ width: 0 }} animate={{ width: `${item.value}%` }}
                       transition={{ delay: 0.7 + i * 0.15, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-                      style={{ boxShadow: "0 0 8px hsl(190 100% 50% / 0.4)" }}
-                    />
+                      style={{ boxShadow: "0 0 8px hsl(190 100% 50% / 0.4)" }} />
                   </div>
                 </div>
               ))}
@@ -284,38 +243,26 @@ const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }
           </motion.div>
         </div>
 
-        {/* Auto-playing intro video (always visible) */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          className="mb-8"
-        >
+        {/* Auto-playing intro video */}
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.5 }} className="mb-8">
           <h3 className="font-display text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
             <Play className="w-5 h-5 text-primary" />
             Welcome to {course.title}
           </h3>
           <div className="glass rounded-3xl p-2 neon-border overflow-hidden"
-            style={{ boxShadow: "0 0 30px hsl(190 100% 50% / 0.15), 0 0 60px hsl(190 100% 50% / 0.05)" }}
-          >
+            style={{ boxShadow: "0 0 30px hsl(190 100% 50% / 0.15), 0 0 60px hsl(190 100% 50% / 0.05)" }}>
             <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
               <iframe
                 src={`https://www.youtube.com/embed/${course.videoId}?autoplay=1&mute=1&rel=0`}
                 title={course.title}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full"
-              />
+                allowFullScreen className="absolute inset-0 w-full h-full" />
             </div>
             <div className="flex items-center gap-2 px-4 py-3">
               <Globe className="w-4 h-4 text-muted-foreground" />
               <span className="text-xs text-muted-foreground font-display tracking-wider">{course.lang} Intro</span>
-              <a
-                href={`https://www.youtube.com/watch?v=${course.videoId}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ml-auto flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
-              >
+              <a href={`https://www.youtube.com/watch?v=${course.videoId}`} target="_blank" rel="noopener noreferrer"
+                className="ml-auto flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
                 <ExternalLink className="w-3.5 h-3.5" />
                 <span className="font-display tracking-wider">Watch on YouTube</span>
               </a>
@@ -326,56 +273,28 @@ const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }
         {/* Enrollment success section */}
         <AnimatePresence>
           {enrollState === "success" && (
-            <motion.div
-              initial={{ opacity: 0, y: 40, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-            >
+            <motion.div initial={{ opacity: 0, y: 40, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}>
               {/* Success message */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                className="glass-strong rounded-3xl p-10 text-center mb-8 glow-blue relative overflow-hidden"
-              >
+              <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.6 }}
+                className="glass-strong rounded-3xl p-10 text-center mb-8 glow-blue relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5" />
                 <div className="relative z-10">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
-                    className="text-5xl mb-4"
-                  >
-                    🎉
-                  </motion.div>
-                  <h2 className="font-display text-2xl md:text-3xl font-bold text-gradient mb-3">
-                    ENROLLMENT SUCCESSFUL
-                  </h2>
-                  <p className="text-muted-foreground text-sm max-w-md mx-auto">
-                    You are now officially enrolled in this FREE course.
-                  </p>
+                  <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.4, type: "spring", stiffness: 200 }} className="text-5xl mb-4">🎉</motion.div>
+                  <h2 className="font-display text-2xl md:text-3xl font-bold text-gradient mb-3">ENROLLMENT SUCCESSFUL</h2>
+                  <p className="text-muted-foreground text-sm max-w-md mx-auto">You are now officially enrolled in this FREE course.</p>
                 </div>
               </motion.div>
 
-              {/* Video player + Lesson sidebar */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-                className="flex flex-col lg:flex-row gap-6 mb-6"
-              >
-                {/* YouTube Embed */}
+              {/* Video + Lesson sidebar */}
+              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }}
+                className="flex flex-col lg:flex-row gap-6 mb-6">
                 <div className="flex-1 glass rounded-3xl p-2 neon-border overflow-hidden"
-                  style={{ boxShadow: "0 0 30px hsl(190 100% 50% / 0.15), 0 0 60px hsl(190 100% 50% / 0.05)" }}
-                >
+                  style={{ boxShadow: "0 0 30px hsl(190 100% 50% / 0.15), 0 0 60px hsl(190 100% 50% / 0.05)" }}>
                   <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
-                    <iframe
-                      src={`https://www.youtube.com/embed/${course.videoId}?autoplay=1&mute=1&rel=0`}
-                      title={course.title}
+                    <iframe src={`https://www.youtube.com/embed/${course.videoId}?autoplay=1&mute=1&rel=0`} title={course.title}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="absolute inset-0 w-full h-full"
-                    />
+                      allowFullScreen className="absolute inset-0 w-full h-full" />
                   </div>
                   <div className="flex items-center gap-2 px-4 py-3">
                     <Globe className="w-4 h-4 text-muted-foreground" />
@@ -387,13 +306,8 @@ const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }
                   </div>
                 </div>
 
-                {/* Lesson Sidebar */}
-                <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.8, duration: 0.5 }}
-                  className="lg:w-72 glass rounded-2xl p-5 glow-violet max-h-[420px] overflow-y-auto"
-                >
+                <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.8, duration: 0.5 }}
+                  className="lg:w-72 glass rounded-2xl p-5 glow-violet max-h-[420px] overflow-y-auto">
                   <h4 className="font-display text-xs tracking-wider text-muted-foreground mb-4 uppercase flex items-center gap-2">
                     <List className="w-4 h-4" /> Course Lessons
                   </h4>
@@ -401,14 +315,9 @@ const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }
                     {lessons.map((lesson, i) => {
                       const done = completedLessons.includes(i);
                       return (
-                        <motion.button
-                          key={i}
-                          initial={{ opacity: 0, x: 10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.9 + i * 0.05 }}
+                        <motion.button key={i} initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.9 + i * 0.05 }}
                           onClick={() => setCompletedLessons(prev => done ? prev.filter(l => l !== i) : [...prev, i])}
-                          className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-left text-xs transition-all cursor-pointer ${done ? "bg-primary/15 text-primary" : "hover:bg-muted/30 text-muted-foreground hover:text-foreground"}`}
-                        >
+                          className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-left text-xs transition-all cursor-pointer ${done ? "bg-primary/15 text-primary" : "hover:bg-muted/30 text-muted-foreground hover:text-foreground"}`}>
                           <CheckSquare className={`w-4 h-4 flex-shrink-0 ${done ? "text-primary" : "text-muted-foreground/40"}`} />
                           <span className="font-display">{i + 1}. {lesson}</span>
                         </motion.button>
@@ -418,52 +327,36 @@ const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }
                   <div className="mt-4 pt-3 border-t border-muted/20">
                     <div className="flex justify-between text-xs mb-1.5">
                       <span className="text-muted-foreground">Progress</span>
-                      <span className="text-primary font-semibold">{Math.round((completedLessons.length / lessons.length) * 100)}%</span>
+                      <span className="text-primary font-semibold">{Math.round((completedLessons.length / Math.max(lessons.length, 1)) * 100)}%</span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
-                      <motion.div
-                        className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
-                        animate={{ width: `${(completedLessons.length / lessons.length) * 100}%` }}
+                      <motion.div className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
+                        animate={{ width: `${(completedLessons.length / Math.max(lessons.length, 1)) * 100}%` }}
                         transition={{ duration: 0.4 }}
-                        style={{ boxShadow: "0 0 8px hsl(190 100% 50% / 0.4)" }}
-                      />
+                        style={{ boxShadow: "0 0 8px hsl(190 100% 50% / 0.4)" }} />
                     </div>
                   </div>
                 </motion.div>
               </motion.div>
 
               {/* Action buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1, duration: 0.5 }}
-                className="flex flex-wrap gap-4 mb-6"
-              >
-                <button
-                  onClick={() => setShowPlaylist(!showPlaylist)}
-                  className="glass rounded-full px-6 py-3 flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors glow-blue cursor-pointer"
-                >
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1, duration: 0.5 }}
+                className="flex flex-wrap gap-4 mb-6">
+                <button onClick={() => setShowPlaylist(!showPlaylist)}
+                  className="glass rounded-full px-6 py-3 flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors glow-blue cursor-pointer">
                   <Play className="w-4 h-4" />
                   <span className="font-display text-xs tracking-wider">Course Playlist</span>
                 </button>
-                <a
-                  href={`https://www.youtube.com/watch?v=${course.videoId}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass rounded-full px-6 py-3 flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors glow-violet cursor-pointer"
-                >
+                <a href={`https://www.youtube.com/watch?v=${course.videoId}`} target="_blank" rel="noopener noreferrer"
+                  className="glass rounded-full px-6 py-3 flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors glow-violet cursor-pointer">
                   <ExternalLink className="w-4 h-4" />
-                  <span className="font-display text-xs tracking-wider">Watch on YouTube</span>
+                  <span className="font-display text-xs tracking-wider">Watch Full Course on YouTube</span>
                 </a>
               </motion.div>
 
               {/* Email section */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2, duration: 0.5 }}
-                className="glass rounded-2xl p-6 glow-violet"
-              >
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 0.5 }}
+                className="glass rounded-2xl p-6 glow-violet">
                 <div className="flex items-center gap-3 mb-3">
                   <Mail className="w-5 h-5 text-accent" />
                   <span className="font-display text-xs tracking-wider text-muted-foreground uppercase">Registered Email</span>
@@ -471,9 +364,7 @@ const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }
                 <p className="font-mono text-sm text-primary mb-2">
                   <Typewriter text="student@smartlearn.com" delay={1200} />
                 </p>
-                <p className="text-xs text-muted-foreground">
-                  Course access has been sent to your email.
-                </p>
+                <p className="text-xs text-muted-foreground">Course access has been sent to your email.</p>
               </motion.div>
             </motion.div>
           )}
