@@ -6,8 +6,7 @@ import MouseGlow from "@/components/MouseGlow";
 import AiLightSweep from "@/components/AiLightSweep";
 import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
-import CourseUniverse from "@/components/CourseUniverse";
-import { courses, type Course } from "@/data/courses";
+import CourseUniverse, { courses } from "@/components/CourseUniverse";
 import CourseDetail from "@/components/CourseDetail";
 import TeamSection from "@/components/TeamSection";
 import Footer from "@/components/Footer";
@@ -37,7 +36,7 @@ const tabComponents: Record<string, React.FC<{ userEmail?: string }>> = {
 
 const Index = () => {
   const [view, setView] = useState<View>("hero");
-  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+  const [selectedCourse, setSelectedCourse] = useState<typeof courses[0] | null>(null);
   const [activeTab, setActiveTab] = useState<TabId>(null);
   const [user, setUser] = useState<{ email: string } | null>(null);
   const [authModal, setAuthModal] = useState<"login" | "signup" | null>(null);
@@ -110,7 +109,7 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [saveScrollPosition, pushHistoryState]);
 
-  const selectCourse = useCallback((course: Course) => {
+  const selectCourse = useCallback((course: typeof courses[0]) => {
     saveScrollPosition();
     setSelectedCourse(course);
     setView("detail");
