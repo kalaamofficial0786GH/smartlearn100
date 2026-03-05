@@ -10,6 +10,7 @@ import CourseUniverse, { courses } from "@/components/CourseUniverse";
 import CourseDetail from "@/components/CourseDetail";
 import TeamSection from "@/components/TeamSection";
 import Footer from "@/components/Footer";
+import SmartLearnChatbot from "@/components/SmartLearnChatbot";
 import Navbar, { type TabId } from "@/components/Navbar";
 import CoursesTab from "@/components/tabs/CoursesTab";
 import DashboardTab from "@/components/tabs/DashboardTab";
@@ -244,6 +245,8 @@ const Index = () => {
           />
         )}
       </AnimatePresence>
+
+      <SmartLearnChatbot />
     </div>
   );
 };
