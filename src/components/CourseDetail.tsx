@@ -110,6 +110,20 @@ const courseLessons: Record<number, string[]> = {
   8: ["Flutter Setup", "Dart Basics", "Widgets", "State Management", "Navigation", "Firebase Integration", "Publishing"],
   9: ["Git Basics", "Branching", "Merging & Rebasing", "GitHub Flow", "Pull Requests", "Actions & CI/CD", "Open Source"],
   10: ["Design Thinking", "Wireframing", "Figma Basics", "Color & Typography", "Prototyping", "User Testing", "Portfolio"],
+  11: ["Python Introduction", "Variables & Datatypes", "User Input & Casting", "If-Else & Booleans", "For Loop", "While Loop", "Collections", "Functions", "OOP Basics", "Projects"],
+  12: ["HTML Basics", "CSS Styling", "Flexbox & Grid", "JavaScript Fundamentals", "DOM Manipulation", "Responsive Design", "Final Project"],
+  13: ["JS Introduction", "Variables & Types", "Functions", "DOM Explained", "Events", "Async JS", "Mini Project"],
+  14: ["Java Setup", "Variables & Types", "OOP Concepts", "Inheritance", "Collections", "Exception Handling", "Projects"],
+  15: ["What is AI Coding", "Bolt AI Setup", "Building UI", "Adding Features", "Deploying App"],
+  16: ["Arrays", "Linked Lists", "Stacks & Queues", "Trees", "Graphs", "Sorting", "Searching", "Dynamic Programming"],
+  17: ["Python Basics", "OOP", "File Handling", "Functional Programming", "PyTest", "Flask & Streamlit", "Pandas & Matplotlib", "REST APIs"],
+  18: ["SQL Introduction", "SELECT & WHERE", "Joins", "Subqueries", "Aggregations", "Window Functions", "Stored Procedures", "Optimization"],
+  19: ["Git Basics", "Branching", "Merging", "Pull Requests", "GitHub Flow", "Collaboration"],
+  20: ["What is Vibe Coding", "AI Tools Overview", "Cursor & Bolt", "Building E-Commerce", "Live Demo"],
+  21: ["Domain & Hosting", "HTML Structure", "CSS Styling", "Deploying Website", "Free Hosting Options"],
+  22: ["C Introduction", "Variables & Types", "Control Flow", "Functions", "Pointers", "Structures", "File I/O", "Projects"],
+  23: ["Data Science Intro", "Python for DS", "Pandas & NumPy", "Data Visualization", "Machine Learning Basics", "Model Building", "Projects"],
+  24: ["Excel Basics", "Formulas & Functions", "Charts & Graphs", "Pivot Tables", "VLOOKUP", "Data Analysis", "Advanced Features"],
 };
 
 const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }) => {
