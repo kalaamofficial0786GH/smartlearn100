@@ -42,30 +42,44 @@ const Navbar = ({ activeTab, onTabChange, onSignUp, onLogin, user, onLogout }: N
         </button>
 
         {/* Nav Items */}
-        <div className="hidden lg:flex items-center gap-1">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => onTabChange(activeTab === item.id ? null : item.id)}
-              className={`relative flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium transition-all duration-300 cursor-pointer ${
-                activeTab === item.id
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {item.icon}
-              <span className="font-display tracking-wide">{item.label}</span>
-              {activeTab === item.id && (
-                <motion.div
-                  layoutId="navIndicator"
-                  className="absolute inset-0 rounded-xl bg-primary/10 border border-primary/20"
-                  style={{ zIndex: -1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                />
-              )}
-            </button>
-          ))}
-        </div>
+        <TooltipProvider delayDuration={200}>
+          <div className="hidden lg:flex items-center gap-1">
+            {navItems.map((item) => (
+              <Tooltip key={item.id}>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={() => onTabChange(activeTab === item.id ? null : item.id)}
+                    className={`relative flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium transition-all duration-300 cursor-pointer ${
+                      activeTab === item.id
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {item.icon}
+                    <span className="font-display tracking-wide">{item.label}</span>
+                    {activeTab === item.id && (
+                      <motion.div
+                        layoutId="navIndicator"
+                        className="absolute inset-0 rounded-xl bg-primary/10 border border-primary/20"
+                        style={{ zIndex: -1 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      />
+                    )}
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent
+                  side="bottom"
+                  className="glass-strong border-primary/20 text-xs font-body text-muted-foreground tracking-wide px-4 py-2"
+                  style={{
+                    boxShadow: "0 0 15px hsl(var(--neon-blue) / 0.2), 0 4px 16px rgba(0,0,0,0.3)",
+                  }}
+                >
+                  {item.tooltip}
+                </TooltipContent>
+              </Tooltip>
+            ))}
+          </div>
+        </TooltipProvider>
 
         {/* Mobile menu */}
         <div className="flex lg:hidden items-center gap-1 overflow-x-auto scrollbar-none">
