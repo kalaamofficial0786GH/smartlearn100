@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import IntroScreen from "@/components/IntroScreen";
 import ParticleField from "@/components/ParticleField";
 import FloatingCodeLines from "@/components/FloatingCodeLines";
 import MouseGlow from "@/components/MouseGlow";
@@ -36,6 +37,7 @@ const tabComponents: Record<string, React.FC<{ userEmail?: string }>> = {
 };
 
 const Index = () => {
+  const [showIntro, setShowIntro] = useState(true);
   const [view, setView] = useState<View>("hero");
   const [selectedCourse, setSelectedCourse] = useState<typeof courses[0] | null>(null);
   const [activeTab, setActiveTab] = useState<TabId>(null);
@@ -161,92 +163,101 @@ const Index = () => {
 
   return (
     <div className="relative min-h-screen bg-background grid-floor overflow-x-hidden">
-      <ParticleField />
-      <FloatingCodeLines />
-      <MouseGlow />
-      <AiLightSweep />
-
-      <Navbar
-        activeTab={activeTab}
-        onTabChange={handleTabChange}
-        onSignUp={() => setAuthModal("signup")}
-        onLogin={() => setAuthModal("login")}
-        user={user}
-        onLogout={() => { setUser(null); setActiveTab(null); }}
-      />
-
-      <div className="relative z-10 pt-20">
-        <AnimatePresence mode="wait">
-          {activeTab && TabContent ? (
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, x: 60, filter: "blur(8px)" }}
-              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, x: -40, filter: "blur(8px)" }}
-              transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="max-w-6xl mx-auto px-4 md:px-8 py-8"
-            >
-              <TabContent userEmail={user?.email} />
-            </motion.div>
-          ) : (
-            <>
-              {view === "hero" && (
-                <motion.div
-                  key="hero"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0, scale: 1.15, filter: "blur(12px)" }}
-                  transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-                >
-                  <HeroSection onEnter={enterUniverse} />
-                  <StatsSection />
-                  <TeamSection />
-                  <Footer />
-                </motion.div>
-              )}
-
-              {view === "courses" && (
-                <motion.div
-                  key="courses"
-                  initial={{ opacity: 0, x: 60 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -40 }}
-                  transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
-                >
-                  <CourseUniverse onSelectCourse={selectCourse} onBack={backToHero} />
-                  <Footer />
-                </motion.div>
-              )}
-
-              {view === "detail" && selectedCourse && (
-                <motion.div
-                  key="detail"
-                  initial={{ opacity: 0, x: 60 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -40 }}
-                  transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
-                >
-                  <CourseDetail course={selectedCourse} onBack={backToCourses} />
-                  <Footer />
-                </motion.div>
-              )}
-            </>
-          )}
-        </AnimatePresence>
-      </div>
-
-      {/* Auth Modal */}
-      <AnimatePresence>
-        {authModal && (
-          <AuthModal
-            mode={authModal}
-            onClose={() => setAuthModal(null)}
-            onSuccess={handleAuthSuccess}
-          />
+      <AnimatePresence mode="wait">
+        {showIntro && (
+          <IntroScreen onComplete={() => setShowIntro(false)} />
         )}
       </AnimatePresence>
 
-      <SmartLearnChatbot />
+      {!showIntro && (
+        <>
+          <ParticleField />
+          <FloatingCodeLines />
+          <MouseGlow />
+          <AiLightSweep />
+
+          <Navbar
+            activeTab={activeTab}
+            onTabChange={handleTabChange}
+            onSignUp={() => setAuthModal("signup")}
+            onLogin={() => setAuthModal("login")}
+            user={user}
+            onLogout={() => { setUser(null); setActiveTab(null); }}
+          />
+
+          <div className="relative z-10 pt-20">
+            <AnimatePresence mode="wait">
+              {activeTab && TabContent ? (
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, x: 60, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, x: -40, filter: "blur(8px)" }}
+                  transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  className="max-w-6xl mx-auto px-4 md:px-8 py-8"
+                >
+                  <TabContent userEmail={user?.email} />
+                </motion.div>
+              ) : (
+                <>
+                  {view === "hero" && (
+                    <motion.div
+                      key="hero"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0, scale: 1.15, filter: "blur(12px)" }}
+                      transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    >
+                      <HeroSection onEnter={enterUniverse} />
+                      <StatsSection />
+                      <TeamSection />
+                      <Footer />
+                    </motion.div>
+                  )}
+
+                  {view === "courses" && (
+                    <motion.div
+                      key="courses"
+                      initial={{ opacity: 0, x: 60 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -40 }}
+                      transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    >
+                      <CourseUniverse onSelectCourse={selectCourse} onBack={backToHero} />
+                      <Footer />
+                    </motion.div>
+                  )}
+
+                  {view === "detail" && selectedCourse && (
+                    <motion.div
+                      key="detail"
+                      initial={{ opacity: 0, x: 60 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -40 }}
+                      transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    >
+                      <CourseDetail course={selectedCourse} onBack={backToCourses} />
+                      <Footer />
+                    </motion.div>
+                  )}
+                </>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <AnimatePresence>
+            {authModal && (
+              <AuthModal
+                mode={authModal}
+                onClose={() => setAuthModal(null)}
+                onSuccess={handleAuthSuccess}
+              />
+            )}
+          </AnimatePresence>
+
+          <SmartLearnChatbot />
+        </>
+      )}
     </div>
   );
 };
