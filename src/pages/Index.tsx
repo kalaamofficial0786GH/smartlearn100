@@ -246,8 +246,6 @@ const Index = () => {
                       <Footer />
                     </motion.div>
                   )}
-                    </motion.div>
-                  )}
                 </>
               )}
             </AnimatePresence>
