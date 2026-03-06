@@ -19,6 +19,9 @@ import AboutTab from "@/components/tabs/AboutTab";
 import ContactTab from "@/components/tabs/ContactTab";
 import CollegeTab from "@/components/tabs/CollegeTab";
 import AuthModal from "@/components/tabs/AuthModal";
+import WelcomeNotification from "@/components/WelcomeNotification";
+import EnrollmentConfetti from "@/components/EnrollmentConfetti";
+import ScrollMotivation from "@/components/ScrollMotivation";
 
 type View = "hero" | "courses" | "detail";
 
@@ -43,6 +46,8 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState<TabId>(null);
   const [user, setUser] = useState<{ email: string } | null>(null);
   const [authModal, setAuthModal] = useState<"login" | "signup" | null>(null);
+  const [showWelcome, setShowWelcome] = useState(false);
+  const [showEnrollConfetti, setShowEnrollConfetti] = useState(false);
   const scrollPositions = useRef<Map<string, number>>(new Map());
   const isPoppingState = useRef(false);
 
@@ -108,6 +113,7 @@ const Index = () => {
   const enterUniverse = useCallback(() => {
     saveScrollPosition();
     setView("courses");
+    setShowWelcome(true);
     pushHistoryState("courses", null, null);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [saveScrollPosition, pushHistoryState]);
@@ -236,7 +242,7 @@ const Index = () => {
                       exit={{ opacity: 0, x: -40 }}
                       transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
                     >
-                      <CourseDetail course={selectedCourse} onBack={backToCourses} />
+                      <CourseDetail course={selectedCourse} onBack={backToCourses} onEnrollSuccess={() => setShowEnrollConfetti(true)} />
                       <Footer />
                     </motion.div>
                   )}
@@ -256,6 +262,9 @@ const Index = () => {
           </AnimatePresence>
 
           <SmartLearnChatbot />
+          <WelcomeNotification show={showWelcome} onDone={() => setShowWelcome(false)} />
+          <EnrollmentConfetti show={showEnrollConfetti} onDone={() => setShowEnrollConfetti(false)} />
+          <ScrollMotivation />
         </>
       )}
     </div>

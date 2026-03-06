@@ -126,7 +126,7 @@ const courseLessons: Record<number, string[]> = {
   24: ["Excel Basics", "Formulas & Functions", "Charts & Graphs", "Pivot Tables", "VLOOKUP", "Data Analysis", "Advanced Features"],
 };
 
-const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }) => {
+const CourseDetail = ({ course, onBack, onEnrollSuccess }: { course: Course; onBack: () => void; onEnrollSuccess?: () => void }) => {
   const [enrollState, setEnrollState] = useState<"idle" | "loading" | "success">("idle");
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
   const [showPlaylist, setShowPlaylist] = useState(false);
@@ -137,7 +137,10 @@ const CourseDetail = ({ course, onBack }: { course: Course; onBack: () => void }
 
   const handleEnroll = () => {
     setEnrollState("loading");
-    setTimeout(() => setEnrollState("success"), 2000);
+    setTimeout(() => {
+      setEnrollState("success");
+      onEnrollSuccess?.();
+    }, 2000);
   };
 
   return (
