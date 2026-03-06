@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { BookOpen, LayoutDashboard, Info, Phone, GraduationCap, LogOut, User, ChevronDown } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export type TabId = "courses" | "dashboard" | "about" | "contact" | "college" | null;
 
@@ -13,12 +14,12 @@ interface NavbarProps {
   onLogout: () => void;
 }
 
-const navItems: { id: TabId; label: string; icon: React.ReactNode }[] = [
-  { id: "courses", label: "Courses", icon: <BookOpen className="w-4 h-4" /> },
-  { id: "dashboard", label: "Dashboard", icon: <LayoutDashboard className="w-4 h-4" /> },
-  { id: "about", label: "About", icon: <Info className="w-4 h-4" /> },
-  { id: "contact", label: "Contact", icon: <Phone className="w-4 h-4" /> },
-  { id: "college", label: "Al-Ameen Polytechnic", icon: <GraduationCap className="w-4 h-4" /> },
+const navItems: { id: TabId; label: string; icon: React.ReactNode; tooltip: string }[] = [
+  { id: "courses", label: "Courses", icon: <BookOpen className="w-4 h-4" />, tooltip: "Explore free coding courses" },
+  { id: "dashboard", label: "Dashboard", icon: <LayoutDashboard className="w-4 h-4" />, tooltip: "Track your learning journey" },
+  { id: "about", label: "About", icon: <Info className="w-4 h-4" />, tooltip: "Discover SmartLearn mission" },
+  { id: "contact", label: "Contact", icon: <Phone className="w-4 h-4" />, tooltip: "Connect with our team" },
+  { id: "college", label: "Al-Ameen Polytechnic", icon: <GraduationCap className="w-4 h-4" />, tooltip: "Our partner institution" },
 ];
 
 const Navbar = ({ activeTab, onTabChange, onSignUp, onLogin, user, onLogout }: NavbarProps) => {
