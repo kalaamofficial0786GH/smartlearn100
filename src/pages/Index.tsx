@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import IntroScreen from "@/components/IntroScreen";
 import ParticleField from "@/components/ParticleField";
 import FloatingCodeLines from "@/components/FloatingCodeLines";
 import MouseGlow from "@/components/MouseGlow";
