@@ -113,6 +113,7 @@ const Index = () => {
   const enterUniverse = useCallback(() => {
     saveScrollPosition();
     setView("courses");
+    setShowWelcome(true);
     pushHistoryState("courses", null, null);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [saveScrollPosition, pushHistoryState]);
