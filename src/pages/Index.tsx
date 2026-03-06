@@ -19,6 +19,9 @@ import AboutTab from "@/components/tabs/AboutTab";
 import ContactTab from "@/components/tabs/ContactTab";
 import CollegeTab from "@/components/tabs/CollegeTab";
 import AuthModal from "@/components/tabs/AuthModal";
+import WelcomeNotification from "@/components/WelcomeNotification";
+import EnrollmentConfetti from "@/components/EnrollmentConfetti";
+import ScrollMotivation from "@/components/ScrollMotivation";
 
 type View = "hero" | "courses" | "detail";
 
@@ -43,6 +46,8 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState<TabId>(null);
   const [user, setUser] = useState<{ email: string } | null>(null);
   const [authModal, setAuthModal] = useState<"login" | "signup" | null>(null);
+  const [showWelcome, setShowWelcome] = useState(false);
+  const [showEnrollConfetti, setShowEnrollConfetti] = useState(false);
   const scrollPositions = useRef<Map<string, number>>(new Map());
   const isPoppingState = useRef(false);
 
