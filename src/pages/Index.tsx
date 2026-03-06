@@ -37,6 +37,7 @@ const tabComponents: Record<string, React.FC<{ userEmail?: string }>> = {
 };
 
 const Index = () => {
+  const [showIntro, setShowIntro] = useState(true);
   const [view, setView] = useState<View>("hero");
   const [selectedCourse, setSelectedCourse] = useState<typeof courses[0] | null>(null);
   const [activeTab, setActiveTab] = useState<TabId>(null);
