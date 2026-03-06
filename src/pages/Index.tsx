@@ -242,8 +242,10 @@ const Index = () => {
                       exit={{ opacity: 0, x: -40 }}
                       transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
                     >
-                      <CourseDetail course={selectedCourse} onBack={backToCourses} />
+                      <CourseDetail course={selectedCourse} onBack={backToCourses} onEnrollSuccess={() => setShowEnrollConfetti(true)} />
                       <Footer />
+                    </motion.div>
+                  )}
                     </motion.div>
                   )}
                 </>
@@ -262,6 +264,9 @@ const Index = () => {
           </AnimatePresence>
 
           <SmartLearnChatbot />
+          <WelcomeNotification show={showWelcome} onDone={() => setShowWelcome(false)} />
+          <EnrollmentConfetti show={showEnrollConfetti} onDone={() => setShowEnrollConfetti(false)} />
+          <ScrollMotivation />
         </>
       )}
     </div>
