@@ -5,6 +5,7 @@ import { useMotionValue, useTransform } from "framer-motion";
 import { Star, Zap, ArrowLeft, Globe, Filter } from "lucide-react";
 
 export const courses = [
+  // === Coding Courses ===
   { id: 1, title: "Full Stack Web Development", category: "Web Dev", rating: 4.9, students: "18,540", reviews: "4,200+", color: "neon-blue", videoId: "nu_pCVPKzTk", lang: "English" },
   { id: 2, title: "Frontend (HTML, CSS, JS)", category: "Frontend", rating: 4.8, students: "22,300", reviews: "5,100+", color: "neon-violet", videoId: "HcOc7P5BMi4", lang: "Tamil" },
   { id: 3, title: "React JS Complete Course", category: "Frontend", rating: 4.7, students: "14,120", reviews: "3,400+", color: "neon-blue", videoId: "SqcY0GlETPk", lang: "English" },
@@ -29,6 +30,34 @@ export const courses = [
   { id: 22, title: "C Programming Complete Course – Tamil", category: "Programming", rating: 4.8, students: "18,400", reviews: "2,700+", color: "neon-violet", videoId: "fmSnLiAv-zc", lang: "Tamil" },
   { id: 23, title: "Data Science & Machine Learning – Tamil", category: "AI / ML", rating: 4.9, students: "22,100", reviews: "3,300+", color: "neon-blue", videoId: "k6HOBjkUkE4", lang: "Tamil" },
   { id: 24, title: "Microsoft Excel Masterclass – Tamil", category: "Software Tools", rating: 4.8, students: "16,700", reviews: "2,500+", color: "neon-violet", videoId: "ZmBjibf8dyQ", lang: "Tamil" },
+
+  // === General Knowledge ===
+  { id: 25, title: "General Knowledge Quiz Challenge", category: "General Knowledge", rating: 4.6, students: "12,400", reviews: "1,800+", color: "neon-blue", videoId: "_jSVJhMai2A", lang: "English" },
+  { id: 26, title: "General Knowledge for Competitive Exams – Tamil", category: "General Knowledge", rating: 4.7, students: "14,200", reviews: "2,100+", color: "neon-violet", videoId: "1bghVmq9D6k", lang: "Tamil" },
+
+  // === Computer Fundamentals ===
+  { id: 27, title: "Computer Basics for Absolute Beginners", category: "Computer Fundamentals", rating: 4.8, students: "30,600", reviews: "4,500+", color: "neon-blue", videoId: "mG14sTC5fYo", lang: "English" },
+  { id: 28, title: "Computer Hardware & Basics – Tamil", category: "Computer Fundamentals", rating: 4.7, students: "8,900", reviews: "1,400+", color: "neon-violet", videoId: "SF5jc5XwP_0", lang: "Tamil" },
+
+  // === Hackathon Preparation ===
+  { id: 29, title: "How to Win Any Hackathon – Full Roadmap", category: "Hackathon Prep", rating: 4.7, students: "9,200", reviews: "1,500+", color: "neon-blue", videoId: "VROOQCTqcEk", lang: "English" },
+  { id: 30, title: "Smart India Hackathon – Preparation Guide", category: "Hackathon Prep", rating: 4.8, students: "11,300", reviews: "1,900+", color: "neon-violet", videoId: "3qK9sDowc-M", lang: "English" },
+
+  // === TNPSC Exam Preparation ===
+  { id: 31, title: "TNPSC Beginners Guide – How to Start", category: "TNPSC Prep", rating: 4.8, students: "15,800", reviews: "2,600+", color: "neon-blue", videoId: "gVWDCRQ3m8w", lang: "Tamil" },
+  { id: 32, title: "TNPSC Group 4 Preparation Strategy – Tamil", category: "TNPSC Prep", rating: 4.9, students: "22,500", reviews: "3,800+", color: "neon-violet", videoId: "BSrw7czlzjE", lang: "Tamil" },
+
+  // === Career Guidance ===
+  { id: 33, title: "Career Guidance After 12th – Tamil", category: "Career Guidance", rating: 4.7, students: "18,600", reviews: "2,900+", color: "neon-blue", videoId: "GDZX4xlIlvo", lang: "Tamil" },
+  { id: 34, title: "ECE vs CSE – Which Branch to Choose – Tamil", category: "Career Guidance", rating: 4.6, students: "10,200", reviews: "1,600+", color: "neon-violet", videoId: "wtnLxtdpzB8", lang: "Tamil" },
+
+  // === Interview Preparation ===
+  { id: 35, title: "10 Online Interview Tips – Tamil", category: "Interview Prep", rating: 4.7, students: "8,100", reviews: "1,200+", color: "neon-blue", videoId: "-RPReZURvlM", lang: "Tamil" },
+  { id: 36, title: "How to Attend a Job Interview – Tamil", category: "Interview Prep", rating: 4.8, students: "24,074", reviews: "3,100+", color: "neon-violet", videoId: "61fnG0jrEG8", lang: "Tamil" },
+
+  // === Programming Basics for Beginners ===
+  { id: 37, title: "C Programming Full Course for Beginners", category: "Programming Basics", rating: 4.8, students: "35,200", reviews: "4,800+", color: "neon-blue", videoId: "JTteybG78i8", lang: "English" },
+  { id: 38, title: "12-Hour Free Coding Bootcamp", category: "Programming Basics", rating: 4.9, students: "42,300", reviews: "5,600+", color: "neon-violet", videoId: "cndko2lx-_Y", lang: "English" },
 ];
 
 const allCategories = Array.from(new Set(courses.map(c => c.category)));
