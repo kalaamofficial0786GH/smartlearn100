@@ -124,6 +124,20 @@ const courseLessons: Record<number, string[]> = {
   22: ["C Introduction", "Variables & Types", "Control Flow", "Functions", "Pointers", "Structures", "File I/O", "Projects"],
   23: ["Data Science Intro", "Python for DS", "Pandas & NumPy", "Data Visualization", "Machine Learning Basics", "Model Building", "Projects"],
   24: ["Excel Basics", "Formulas & Functions", "Charts & Graphs", "Pivot Tables", "VLOOKUP", "Data Analysis", "Advanced Features"],
+  25: ["GK Quiz Intro", "History & Culture", "Science & Nature", "Geography", "Current Affairs", "Practice Questions"],
+  26: ["GK அறிமுகம்", "வரலாறு", "அறிவியல்", "புவியியல்", "நடப்பு நிகழ்வுகள்", "பயிற்சி வினாக்கள்"],
+  27: ["What is a Computer", "Hardware Components", "Operating Systems", "File Management", "Internet Basics", "Microsoft Office", "Typing & Shortcuts", "Security Basics"],
+  28: ["கணினி அறிமுகம்", "வன்பொருள்", "மென்பொருள்", "இயக்க அமைப்பு", "நெட்வொர்க்கிங்", "பாதுகாப்பு"],
+  29: ["What is a Hackathon", "Finding Hackathons", "Building a Team", "Ideation Techniques", "Prototyping Fast", "Pitching Your Project", "Winning Strategies"],
+  30: ["SIH Overview", "Problem Statements", "Team Formation", "Tech Stack Selection", "Building MVP", "Presentation Tips"],
+  31: ["TNPSC Overview", "Exam Pattern", "Study Plan", "General Tamil", "General Knowledge", "Aptitude", "Previous Year Papers"],
+  32: ["Group 4 Syllabus", "History of Tamil Nadu", "Indian Polity", "Geography", "Science", "Current Affairs", "Mock Tests"],
+  33: ["Career Options After 12th", "Arts Stream", "Commerce Stream", "Science Stream", "Professional Courses", "Skill Development"],
+  34: ["ECE Overview", "CSE Overview", "Syllabus Comparison", "Job Opportunities", "AI & IoT Trends", "Making the Right Choice"],
+  35: ["Interview Preparation", "Online Interview Setup", "Body Language", "Common Questions", "Salary Negotiation", "Follow-Up Tips"],
+  36: ["Before the Interview", "First Impression", "Research the Company", "Know Your Resume", "Answer with Experience", "Ask Questions", "Thank You Note"],
+  37: ["C Introduction", "Variables & Data Types", "Control Flow", "Functions", "Arrays", "Pointers", "Strings", "Structures", "File I/O", "Projects"],
+  38: ["HTML Intro", "CSS Fundamentals", "JavaScript Basics", "DOM Manipulation", "Responsive Design", "Git Basics", "React Intro", "Node.js Basics", "Full Stack Project"],
 };
 
 const CourseDetail = ({ course, onBack, onEnrollSuccess }: { course: Course; onBack: () => void; onEnrollSuccess?: () => void }) => {
