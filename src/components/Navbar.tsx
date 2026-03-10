@@ -1,7 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { BookOpen, LayoutDashboard, Info, Phone, GraduationCap, LogOut, User, ChevronDown } from "lucide-react";
+import { BookOpen, LayoutDashboard, Info, Phone, GraduationCap, LogOut, User, ChevronDown, Sun, Moon } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useTheme } from "@/components/ThemeProvider";
 
 export type TabId = "courses" | "dashboard" | "about" | "contact" | "college" | null;
 
