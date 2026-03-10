@@ -1,7 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { BookOpen, LayoutDashboard, Info, Phone, GraduationCap, LogOut, User, ChevronDown } from "lucide-react";
+import { BookOpen, LayoutDashboard, Info, Phone, GraduationCap, LogOut, User, ChevronDown, Sun, Moon } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useTheme } from "@/components/ThemeProvider";
 
 export type TabId = "courses" | "dashboard" | "about" | "contact" | "college" | null;
 
@@ -24,6 +25,7 @@ const navItems: { id: TabId; label: string; icon: React.ReactNode; tooltip: stri
 
 const Navbar = ({ activeTab, onTabChange, onSignUp, onLogin, user, onLogout }: NavbarProps) => {
   const [profileOpen, setProfileOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <motion.nav
@@ -109,8 +111,36 @@ const Navbar = ({ activeTab, onTabChange, onSignUp, onLogin, user, onLogout }: N
           </button>
         </div>
 
-        {/* Auth Section */}
+        {/* Theme Toggle & Auth Section */}
         <div className="flex items-center gap-2 shrink-0">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                onClick={toggleTheme}
+                className="relative p-2 rounded-xl glass text-muted-foreground hover:text-foreground transition-all cursor-pointer hover:border-primary/30"
+                aria-label="Toggle theme"
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  {theme === "dark" ? (
+                    <motion.div key="moon" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.3 }}>
+                      <Moon className="w-4 h-4" />
+                    </motion.div>
+                  ) : (
+                    <motion.div key="sun" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.3 }}>
+                      <Sun className="w-4 h-4" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </button>
+            </TooltipTrigger>
+            <TooltipContent
+              side="bottom"
+              className="glass-strong border-primary/20 text-xs font-body text-muted-foreground tracking-wide px-4 py-2"
+              style={{ boxShadow: "0 0 15px hsl(var(--neon-blue) / 0.2), 0 4px 16px rgba(0,0,0,0.3)" }}
+            >
+              {theme === "dark" ? "Switch to Light Mode ☀️" : "Switch to Dark Mode 🌙"}
+            </TooltipContent>
+          </Tooltip>
           {user ? (
             <div className="relative">
               <button

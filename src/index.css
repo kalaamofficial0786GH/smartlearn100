@@ -6,6 +6,52 @@
 
 @layer base {
   :root {
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 190 100% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 263 60% 55%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 14% 92%;
+    --muted-foreground: 220 10% 40%;
+
+    --accent: 263 60% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 87%;
+    --input: 220 13% 87%;
+    --ring: 190 100% 40%;
+
+    --radius: 0.75rem;
+
+    --neon-blue: 190 100% 40%;
+    --neon-violet: 263 60% 55%;
+    --glass: 220 20% 95%;
+    --glass-border: 220 13% 82%;
+
+    --sidebar-background: 220 20% 96%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 190 100% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 263 60% 55%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 13% 87%;
+    --sidebar-ring: 190 100% 40%;
+  }
+
+  .dark {
     --background: 222 47% 4%;
     --foreground: 210 40% 96%;
 
@@ -59,6 +105,11 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  *, *::before, *::after {
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
