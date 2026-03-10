@@ -25,6 +25,7 @@ const navItems: { id: TabId; label: string; icon: React.ReactNode; tooltip: stri
 
 const Navbar = ({ activeTab, onTabChange, onSignUp, onLogin, user, onLogout }: NavbarProps) => {
   const [profileOpen, setProfileOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <motion.nav
