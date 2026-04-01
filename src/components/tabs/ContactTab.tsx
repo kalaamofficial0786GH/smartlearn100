@@ -73,7 +73,7 @@ const ContactTab = () => {
         {/* Contact Info */}
         <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
           {[
-            { icon: <MapPin className="w-5 h-5" />, label: "Address", value: "Al-Ameen Polytechnic College,Erode,TamilNadu," },
+            { icon: <MapPin className="w-5 h-5" />, label: "Address", value: "Al-Ameen Polytechnic College,Erode,TamilNadu" },
             { icon: <Phone className="w-5 h-5" />, label: "Phone", value: "+91 90256 93512" },
             { icon: <Mail className="w-5 h-5" />, label: "Email", value: "kalaamofficial0786@gmail.com" },
           ].map((item, i) => (
