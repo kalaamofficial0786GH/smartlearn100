@@ -30,9 +30,9 @@ const CollegeTab = () => {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="font-display text-2xl md:text-3xl font-bold text-gradient mb-2">Al-Ameen Polytechnic College</h2>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-gradient mb-2">Nandha Engineering College</h2>
         <p className="text-muted-foreground text-sm max-w-2xl">
-          A premier polytechnic institution committed to excellence in technical education since its founding.
+          A premier engineering institution committed to excellence in technical education since its founding.
         </p>
       </div>
 
