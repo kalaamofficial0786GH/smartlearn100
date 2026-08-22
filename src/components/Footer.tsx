@@ -16,7 +16,7 @@ const Footer = () => {
         </div>
         <div className="glass rounded-xl inline-block px-6 py-3 mb-4">
           <p className="text-xs text-muted-foreground">
-            <span className="text-primary font-semibold">Al-Ameen Polytechnic College</span>
+            <span className="text-primary font-semibold">Nandha Engineering College</span>
           </p>
         </div>
         <p className="text-xs text-muted-foreground/50 mt-4">
