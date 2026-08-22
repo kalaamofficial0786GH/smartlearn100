@@ -74,8 +74,8 @@ const ContactTab = () => {
         <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
           {[
             { icon: <MapPin className="w-5 h-5" />, label: "Address", value: "Nandha Engineering College,Erode,TamilNadu" },
-            { icon: <Phone className="w-5 h-5" />, label: "Phone", value: "+91 90256 93512" },
-            { icon: <Mail className="w-5 h-5" />, label: "Email", value: "kalaamofficial0786@gmail.com" },
+            { icon: <Phone className="w-5 h-5" />, label: "Phone", value: "+91 93429 82882" },
+            { icon: <Mail className="w-5 h-5" />, label: "Email", value: "gerzimharrieshma2026@gmail.com" },
           ].map((item, i) => (
             <motion.div
               key={item.label}
