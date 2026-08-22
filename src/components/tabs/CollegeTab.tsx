@@ -45,7 +45,7 @@ const CollegeTab = () => {
           <h3 className="font-display text-sm font-semibold text-foreground">Our History</h3>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Al-Ameen Polytechnic College has been a cornerstone of technical education in Karnataka. Established with a vision to produce skilled professionals, the institution has grown to become one of the most respected polytechnic colleges in the region, blending traditional academic rigor with cutting-edge technology.
+          Nandha Engineering College has been a cornerstone of technical education in Karnataka. Established with a vision to produce skilled professionals, the institution has grown to become one of the most respected polytechnic colleges in the region, blending traditional academic rigor with cutting-edge technology.
         </p>
       </motion.div>
 
