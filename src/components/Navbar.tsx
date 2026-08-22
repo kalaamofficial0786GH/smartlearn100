@@ -19,7 +19,7 @@ const navItems: { id: TabId; label: string; icon: React.ReactNode; tooltip: stri
   { id: "dashboard", label: "Dashboard", icon: <LayoutDashboard className="w-4 h-4" />, tooltip: "Track your learning journey" },
   { id: "about", label: "About", icon: <Info className="w-4 h-4" />, tooltip: "Discover SmartLearn mission" },
   { id: "contact", label: "Contact", icon: <Phone className="w-4 h-4" />, tooltip: "Connect with our team" },
-  { id: "college", label: "Al-Ameen Polytechnic", icon: <GraduationCap className="w-4 h-4" />, tooltip: "Our partner institution" },
+  { id: "college", label: "Nandha Engineering College", icon: <GraduationCap className="w-4 h-4" />, tooltip: "Our partner institution" },
 ];
 
 const Navbar = ({ activeTab, onTabChange, onSignUp, onLogin, user, onLogout }: NavbarProps) => {
