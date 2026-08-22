@@ -73,7 +73,7 @@ const ContactTab = () => {
         {/* Contact Info */}
         <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
           {[
-            { icon: <MapPin className="w-5 h-5" />, label: "Address", value: "Al-Ameen Polytechnic College,Erode,TamilNadu" },
+            { icon: <MapPin className="w-5 h-5" />, label: "Address", value: "Nandha Engineering College,Erode,TamilNadu" },
             { icon: <Phone className="w-5 h-5" />, label: "Phone", value: "+91 90256 93512" },
             { icon: <Mail className="w-5 h-5" />, label: "Email", value: "kalaamofficial0786@gmail.com" },
           ].map((item, i) => (
@@ -99,7 +99,7 @@ const ContactTab = () => {
             <div className="w-full h-full rounded-xl bg-muted/30 flex items-center justify-center">
               <div className="text-center">
                 <MapPin className="w-8 h-8 text-primary/40 mx-auto mb-2" />
-                <p className="text-xs text-muted-foreground">Al-Ameen Polytechnic College</p>
+                <p className="text-xs text-muted-foreground">Nandha Engineering College</p>
                 <p className="text-[10px] text-muted-foreground">Erode,TamilNadu</p>
               </div>
             </div>
