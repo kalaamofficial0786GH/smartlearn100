@@ -4,7 +4,7 @@ import { X, Zap, Code2, Shield, Palette, Award, Rocket, CheckCircle2, ExternalLi
 
 const team = [
   {
-    name: "Mr. R. Mohamed Meera Niyash, B.E.",
+    name: "S.MADHUSHREE",
     role: "Project Mentor",
     tagline: "Guiding futures through technology",
     accent: "blue" as const,
@@ -28,7 +28,7 @@ const team = [
     ],
   },
   {
-    name: "M. Abdul Kalaam",
+    name: "D.AJAY KUMAR",
     role: "Full Stack Developer",
     tagline: "Crafting code that shapes the future",
     accent: "violet" as const,
@@ -76,7 +76,7 @@ const team = [
     ],
   },
   {
-    name: "S. Boopathi",
+    name: "R.MOHAMMED RIFATH",
     role: "Backend Developer",
     tagline: "Engineering robust digital foundations",
     accent: "violet" as const,
@@ -100,7 +100,31 @@ const team = [
     ],
   },
   {
-    name: "G. Priya Dharshini",
+    name: "A.BHAVATHARANI",
+    role: "Testing & Documentation",
+    tagline: "Ensuring perfection in every detail",
+    accent: "blue" as const,
+    experience: "2+ Years",
+    bio: "A meticulous QA specialist and technical writer who ensures every feature meets the highest quality standards. Expert in automated testing and comprehensive documentation.",
+    skills: [
+      { name: "Test Automation", value: 90 },
+      { name: "Technical Writing", value: 95 },
+      { name: "Quality Assurance", value: 92 },
+      { name: "CI/CD Pipelines", value: 82 },
+    ],
+    achievements: [
+      "Built Automated Test Suite",
+      "Created Platform Documentation",
+      "Implemented CI/CD Pipeline",
+      "Designed QA Workflow System",
+    ],
+    projects: [
+      { name: "Test Framework", desc: "End-to-end test automation", tech: ["Cypress", "Jest", "GitHub Actions"], status: 100 },
+      { name: "Docs Portal", desc: "Interactive documentation site", tech: ["Markdown", "Docusaurus", "React"], status: 88 },
+    ],
+  },
+   {
+    name: "P.DHARUN",
     role: "Testing & Documentation",
     tagline: "Ensuring perfection in every detail",
     accent: "blue" as const,
